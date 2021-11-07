@@ -9,6 +9,6 @@ Run install.sh which should reference requirements.txt, reactitems.txt
 
 ### python3 app.py
 
-In the directory of website/webpage/src, you can run:
+In the directory of website/webpage/src, you can run to run and see the website:
 
 ### `yarn start`
