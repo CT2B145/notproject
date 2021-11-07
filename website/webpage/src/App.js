@@ -10,10 +10,6 @@ import MaterialTable from 'material-table'
 
 function App() {
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { data: [] };
-  // }
 
 
   const { useState, useEffect } = React;
@@ -64,28 +60,28 @@ function App() {
   ]);
 
  
-  // useEffect(() => {
+  useEffect(() => {
     
-  // async function fetchMoviesJSON() {
-  //         const response = await fetch('http://localhost:8081/getEUSPRedshiftAll/', {
-  //           // mode: 'no-cors',
-  //           method: 'GET',
-  //           headers: {
-  //             Accept: 'application/json',
-  //           }
-  //         });
-  //         // so await the response..... it returns a "promise first", then we need to recall itself to get it
-  //         // const movies = await response.json();
-  //         // return movies;
+  async function fetchMoviesJSON() {
+          const response = await fetch('http://localhost:8081/getDataAll/', {
+            // mode: 'no-cors',
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+            }
+          });
+          // so await the response..... it returns a "promise first", then we need to recall itself to get it
+          // const movies = await response.json();
+          // return movies;
   
-  //         return response.json()
-  //       }
-  //       // once it gets the response back, thennnnnn do this. aka give the data back
-  //       fetchMoviesJSON().then(movies => {
-  //         setData(movies);
-  //         console.log(movies); // 
-  //       });
-  //         }, []);
+          return response.json()
+        }
+        // once it gets the response back, thennnnnn do this. aka give the data back
+        fetchMoviesJSON().then(movies => {
+          setData(movies);
+          console.log(movies); // 
+        });
+          }, []);
 
 
        // async function updateTable(dataUpdate) {
@@ -120,10 +116,10 @@ function App() {
           //   }, []);
 
   return (
-
+    
 
     <MaterialTable
-      title="Editable Preview"
+      title="Test - View for Doctor A"
       columns={columns}
       data={data}
       editable={{

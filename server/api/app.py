@@ -1,10 +1,19 @@
-################### 
-# test server
-###################
+from flask import Flask, request, jsonify, redirect, make_response
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+import psycopg2
+import json
+import redshift_connector
+import collections
+import sqlite3
+import numpy
+from sqlalchemy import inspect
 
-from flask import Flask, request 
 
 app = Flask(__name__)
+
+CORS(app)
 
 # @app.route("/hello")
 # def hello():
@@ -18,16 +27,10 @@ def home():
 def getInformation():
    
 
-
     # cursor: redshift_connector.Cursor = conn.cursor()
-
-
     connection = sqlite3.connect('../data/doctor_a.db')
     cursor = connection.cursor()
-
-    test = cursor.execute(
-        "select * from user_services_dev.user_services_dev.onboarding_issues")
-
+    cursor.execute('''SELECT * from doctor_a''')
     rows: numpy.ndarray = cursor.fetchall()
     # print(result)
     # rowarray_list = []
@@ -46,21 +49,33 @@ def getInformation():
     for row in rows:
         d = collections.OrderedDict()
         print("dic made")
-        d["id"] = row[0]
-        d["userid"] = row[1]
-        d["comments"] = row[2]
-        d["snow_id"] = row[3]
-        d["action"] = row[4]
-        d["issue_type"] = row[5]
-        d["nho_date"] = row[6]
-        d["sims_approval_date"] = row[7]
+        d["First_Name"] = row[0]
+        d["Last_Name"] = row[1]
+        d["DATE"] = row[2]
+        d["Patient_Type"] = row[3]
+       
         objects_list.append(d)
         print(d)
     print("can i add to the j?")
     
-    conn.close()
+    connection.close()
     return objects_list
 
+
+# GET ONLY ALL ROW
+@app.route('/getDataAll/', methods=["GET"])
+def getAllRows():
+    try:
+        if request.method == "GET":
+            objects_list = getInformation()
+            j = json.dumps(objects_list, indent=4,  default=str)
+            print(j)
+            return j , 200
+
+        return "404"
+    except Exception as e:
+        flash(e)
+        return "This method is unsupported you muppet.", 405
 
 @app.route('/hello', methods=["GET","POST"])
 def login_page():
