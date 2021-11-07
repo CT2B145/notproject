@@ -18,16 +18,16 @@ function App() {
 
 
   const [columns, setColumns] = useState([
-    { title: 'First Name', field: 'first_name' },
-    { title: 'Last Name', field: 'last_name', initialEditValue: 'initial edit value' },
+    { title: 'First Name', field: 'First_Name' },
+    { title: 'Last Name', field: 'Last_Name', initialEditValue: 'initial edit value' },
     // { title: 'I', field: 'issue_type', initialEditValue: 'initial edit value' , lookup: { 34: 'passwords', 63: 'email' },},
     // { title: 'Comments', field: 'comments', initialEditValue: 'initial edit value' },
     // { title: 'Status', field: 'action', initialEditValue: 'initial edit value' },
 
     // { title: 'hire date', field: 'hire_date', type: 'datetime' },
     // { title: 'nho date', field: 'nho_date', type: 'datetime' },
-    { title: 'Appointment Time', field: 'date', type: 'datetime' },
-    { title: 'Patient Type', field: 'Patient_Type', initialEditValue: 'initial edit value' , lookup: { 34: 'Follow-Up', 63: 'New-Patient' },},
+    { title: 'Appointment Time', field: 'DATE', type: 'datetime' },
+    { title: 'Patient Type', field: 'Patient_Type', initialEditValue: 'initial edit value' , lookup: { 'Follow-Up': 'Follow-Up', 'New-Patient': 'New Patient' },},
 
     // {
     //   title: 'Birth Place',
@@ -43,26 +43,15 @@ function App() {
 
 
   const [data, setData] = useState([
-    // { userid: 'mayj', comments: 'Oh bother, the pan fire is now a van fire.', snow_id: 'cottage', action: 'HAMMOND', issue_type: 'CLARKSON', nho_date: '1984-09-12', hire_date: '1984-09-12', sims_approval_date: '1984-09-12' },
-    // { name: 'Mehmet', surname: 'Baran', cheeses: 'cottage', action: 'HAMMOND', sims_approval_date: '1984-09-12' },
-    // { name: 'Mehmet', surname: 'Baran', cheeses: 'cottage', birthYear: 1987, birthCity: 63 },
-    // { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34 },
-    // { userid: '>>>>>>>', comments: 'Make sure you are connected to a vpn!', snow_id: 'If you see this for more than 5 seconds. Double check your connection', action: 'HAMMOND', issue_type: 'CLARKSON', nho_date: '1984-09-12', hire_date: '1984-09-12', sims_approval_date: '1984-09-12' }
-    {first_name:'Grant', last_name:'Fu', date:'2021-11-04 10:00:00', Patient_Type:'Follow-Up'},
-    {first_name:'Dennis', last_name:'FuFreedman', date:'2021-11-04 13:00:00', Patient_Type:34},
-    {first_name:'Ben', last_name:'Kenobi', date:'2021-11-04 13:30:00', Patient_Type:64},
-  //   {first_name:'Grant', last_name:'Fu', date:'2021-11-04 10:00:00', Patient_Type:'Follow-Up'},
-  //   ('Dennis', 'Freedman', '2021-11-04 13:00:00', 'New Patient'),
-  //   ('James', 'May', '2021-11-04 15:00:00', 'Follow-Up'),
-  //  #  ('Richard', 'Hammond', '2021-11-04 1:00:00', 'New Patient')
-  
-  
+    {First_Name:'Dmmy Data', Last_Name:'Fu', DATE:'2021-11-04 10:00:00', Patient_Type:'Follow-Up'},
+    {First_Name:'Dmmy Data', Last_Name:'Fu', DATE:'2021-11-04 10:00:00', Patient_Type:'Follow-Up'},
+    {First_Name:'Dmmy Data', Last_Name:'Fu', DATE:'2021-11-04 10:00:00', Patient_Type:'Follow-Up'},
   ]);
 
  
   useEffect(() => {
     
-  async function fetchMoviesJSON() {
+  async function getData() {
           const response = await fetch('http://localhost:8081/getDataAll/', {
             // mode: 'no-cors',
             method: 'GET',
@@ -77,7 +66,7 @@ function App() {
           return response.json()
         }
         // once it gets the response back, thennnnnn do this. aka give the data back
-        fetchMoviesJSON().then(movies => {
+        getData().then(movies => {
           setData(movies);
           console.log(movies); // 
         });

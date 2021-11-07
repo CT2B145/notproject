@@ -15,33 +15,19 @@ app = Flask(__name__)
 
 CORS(app)
 
-# @app.route("/hello")
-# def hello():
-#     return "Hello World!"
-
 @app.route("/")
 def home():
     return "Hello, Flask!"
 
 
+# helper to get information from the database
 def getInformation():
-   
-
     # cursor: redshift_connector.Cursor = conn.cursor()
     connection = sqlite3.connect('../data/doctor_a.db')
     cursor = connection.cursor()
     cursor.execute('''SELECT * from doctor_a''')
     rows: numpy.ndarray = cursor.fetchall()
     # print(result)
-    # rowarray_list = []
-    # for row in rows:
-    #     t = (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
-    #     rowarray_list.append(t)
-    #     print(row, "sefsefsefesfefe")
-    # j = json.dumps(rowarray_list, indent=4, sort_keys=True, default=str)
-    # print("made it out")
-    # print(rowarray_list)
-    # print(j)
     print("test")
 
     # Convert query to objects of key-value pairs
@@ -75,7 +61,7 @@ def getAllRows():
         return "404"
     except Exception as e:
         flash(e)
-        return "This method is unsupported you muppet.", 405
+        return "This method is unsupported.", 405
 
 @app.route('/hello', methods=["GET","POST"])
 def login_page():

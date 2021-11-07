@@ -1,0 +1,7 @@
+flask
+redshift_connector
+requests
+numpy
+psycopg2
+flask_sqlalchemy
+flask-cors
